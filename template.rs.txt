@@ -1,0 +1,8 @@
+
+pub fn run_one(_data: &str) -> String {
+    "0".to_string()
+}
+
+pub fn run_two(_data: &str) -> String {
+    "0".to_string()
+}
