@@ -63,8 +63,8 @@ pub fn run_two(data: &str) -> String {
                 match data
                     .iter()
                     .enumerate()
-                    .filter(|(j, n)| i != *j)
-                    .map(|(j, n)| *n)
+                    .filter(|(j, _)| i != *j)
+                    .map(|(_, n)| *n)
                     .fold(State::Start, fold_state)
                 {
                     State::Fault => (),
