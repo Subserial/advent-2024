@@ -77,7 +77,6 @@ pub fn run_two(data: &str) -> String {
                             if let Some(prev_idx) = seen.get(&order.1) {
                                 sequence.swap(i, *prev_idx);
                                 ordered = false;
-                                break;
                             }
                         }
                         seen.insert(sequence[i], i);
