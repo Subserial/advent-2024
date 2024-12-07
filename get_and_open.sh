@@ -36,6 +36,7 @@ fi
 cat > src/today.rs << EOF
 pub use crate::puzzles::p$DAY::*;
 pub const INPUT: &str = include_str!("today.txt");
+pub const TEST: &str = include_str!("test.txt");
 EOF
 
 xdg-open "https://adventofcode.com/2024/day/$DAY_DIGITS"
