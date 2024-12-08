@@ -42,8 +42,8 @@ pub fn run_one(data: &str) -> String {
             for j in (i + 1)..coords.len() {
                 let (x1, y1) = coords[i];
                 let (x2, y2) = coords[j];
-                let x_delta = (x2 - x1);
-                let y_delta = (y2 - y1);
+                let x_delta = x2 - x1;
+                let y_delta = y2 - y1;
                 let xu = x2 + x_delta;
                 let yu = y2 + y_delta;
                 let xd = x1 - x_delta;
@@ -64,18 +64,16 @@ pub fn run_two(data: &str) -> String {
     let (node_map, rows, cols) = parse(data);
     let mut seen = HashSet::new();
     for coords in node_map.values() {
-        seen.extend(coords);
         for i in 0..coords.len() {
             for j in (i + 1)..coords.len() {
                 let (x1, y1) = coords[i];
                 let (x2, y2) = coords[j];
-                let x_delta = (x2 - x1);
-                let y_delta = (y2 - y1);
+                let x_delta = x2 - x1;
+                let y_delta = y2 - y1;
                 let mut grow = 0;
                 let mut found = true;
                 while found {
                     found = false;
-                    grow += 1;
                     let xu = x2 + x_delta * grow;
                     let yu = y2 + y_delta * grow;
                     if xu >= 0 && xu < cols && yu >= 0 && yu < rows {
@@ -88,6 +86,7 @@ pub fn run_two(data: &str) -> String {
                         found = true;
                         seen.insert((xd, yd));
                     }
+                    grow += 1;
                 }
             }
         }
