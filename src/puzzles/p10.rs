@@ -45,12 +45,13 @@ fn rating(map: &Vec<Vec<u32>>, collector: impl Fn(Vec<(usize, usize)>) -> usize)
 
 pub fn run_one(data: &str) -> String {
     let map = parse(data);
-    rating(&map, |nines| nines.into_iter().collect::<HashSet<_>>().len())
-        .to_string()
+    rating(&map, |nines| {
+        nines.into_iter().collect::<HashSet<_>>().len()
+    })
+    .to_string()
 }
 
 pub fn run_two(data: &str) -> String {
     let map = parse(data);
-    rating(&map, |nines| nines.len())
-        .to_string()
+    rating(&map, |nines| nines.len()).to_string()
 }
