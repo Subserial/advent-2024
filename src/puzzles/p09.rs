@@ -43,7 +43,7 @@ pub fn run_one(data: &str) -> String {
 }
 
 pub fn run_two(data: &str) -> String {
-    let mut blocks = parse(data);
+    let blocks = parse(data);
     let mut labeled = Vec::new();
     let mut idx = 0;
     while idx < blocks.len() {

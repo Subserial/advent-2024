@@ -58,7 +58,7 @@ fn memo_run(memo: &mut HashMap<(usize, usize), usize>, n: usize, remaining: usiz
 }
 
 pub fn run_two(data: &str) -> String {
-    let mut stones = parse(data);
+    let stones = parse(data);
     let mut memo = HashMap::new();
     stones
         .into_iter()

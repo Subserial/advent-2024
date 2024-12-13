@@ -4,7 +4,7 @@ fn parse(data: &str) -> Vec<Vec<char>> {
     data.lines().map(|line| line.chars().collect()).collect()
 }
 
-fn run(garden: &Vec<Vec<char>>) -> (HashMap<usize, HashSet<(usize, usize)>>) {
+fn run(garden: &Vec<Vec<char>>) -> HashMap<usize, HashSet<(usize, usize)>> {
     let mut gardens: HashMap<usize, HashSet<(usize, usize)>> = HashMap::new();
     let mut plot_map: HashMap<(usize, usize), usize> = HashMap::new();
     let mut next_id = 0;
