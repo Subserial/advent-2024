@@ -53,7 +53,7 @@ fn run(map: &Vec<Vec<char>>) -> (usize, usize) {
             }
         }
     }
-    let length = seen.iter().filter(|(&(row, col, dir), &weight)| row == e_row && col == e_col).map(|(_, &weight)| weight).min().unwrap();
+    let length = seen.iter().filter(|(&(row, col, _), _)| row == e_row && col == e_col).map(|(_, &weight)| weight).min().unwrap();
     let all_seen = best.into_iter().flatten().collect::<HashSet<_>>().len();
     (length, all_seen)
 }
