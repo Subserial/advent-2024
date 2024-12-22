@@ -5,10 +5,22 @@ fn parse(data: &str) -> Vec<Vec<char>> {
 }
 
 fn char_loc(map: &Vec<Vec<char>>, find_c: char) -> (usize, usize) {
-    map.iter().enumerate().find_map(|(row, v)| v.iter().enumerate().find_map(|(j, &c)| if c == find_c {Some((row, j))} else {None})).unwrap()
+    map.iter()
+        .enumerate()
+        .find_map(|(row, v)| {
+            v.iter()
+                .enumerate()
+                .find_map(|(j, &c)| if c == find_c { Some((row, j)) } else { None })
+        })
+        .unwrap()
 }
 
-pub fn next_cheats(map: &Vec<Vec<char>>, row: usize, col: usize, dist: usize) -> Vec<(usize, usize, usize)> {
+pub fn next_cheats(
+    map: &Vec<Vec<char>>,
+    row: usize,
+    col: usize,
+    dist: usize,
+) -> Vec<(usize, usize, usize)> {
     let mut spots = Vec::new();
     for first in 1..=dist {
         for second in 0..=(dist - first) {
@@ -41,16 +53,16 @@ fn run(map: &Vec<Vec<char>>, cheat_dist: usize) -> usize {
     let mut queue = VecDeque::from([(s_row, s_col, 0usize)]);
     while let Some((c_row, c_col, dist)) = queue.pop_front() {
         if map[c_row][c_col] == '#' {
-            continue
+            continue;
         }
         if let Some(&d) = dists.get(&(c_row, c_col)) {
             if d < dist {
-                continue
+                continue;
             }
         }
         dists.insert((c_row, c_col), dist);
         if c_row == e_row && c_col == e_col {
-            continue
+            continue;
         }
         if c_row > 0 {
             queue.push_back((c_row - 1, c_col, dist + 1));

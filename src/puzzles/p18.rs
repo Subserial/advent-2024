@@ -1,11 +1,12 @@
 use std::collections::HashSet;
 
 fn parse(data: &str) -> Vec<(usize, usize)> {
-    data.lines().map(|n| {
-        let (l, r) = n.split_once(',').unwrap();
-        (l.parse().unwrap(), r.parse().unwrap())
-    }).collect()
-
+    data.lines()
+        .map(|n| {
+            let (l, r) = n.split_once(',').unwrap();
+            (l.parse().unwrap(), r.parse().unwrap())
+        })
+        .collect()
 }
 
 #[cfg(feature = "test-input")]
@@ -27,10 +28,10 @@ pub fn run(corrupt: &[(usize, usize)]) -> Option<usize> {
         queue = Vec::new();
         for (row, col) in search {
             if corrupt.contains(&(row, col)) || seen.contains(&(row, col)) {
-                continue
+                continue;
             }
             if row == BOUNDS && col == BOUNDS {
-                return Some(iters)
+                return Some(iters);
             }
             seen.insert((row, col));
             if row > 0 {

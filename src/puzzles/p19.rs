@@ -8,12 +8,17 @@ fn parse(data: &str) -> (HashSet<&str>, Vec<&str>, usize) {
     (stripes, patterns, max)
 }
 
-fn find_order<'a>(memo: &mut HashMap<&'a str, usize>, stripes: &HashSet<&'a str>, pattern: &'a str, max: usize) -> usize {
+fn find_order<'a>(
+    memo: &mut HashMap<&'a str, usize>,
+    stripes: &HashSet<&'a str>,
+    pattern: &'a str,
+    max: usize,
+) -> usize {
     if pattern.is_empty() {
-        return 1
+        return 1;
     }
     if let Some(&v) = memo.get(pattern) {
-        return v
+        return v;
     }
     let mut total = 0;
     for l in 1..=max.min(pattern.len()) {
@@ -28,11 +33,19 @@ fn find_order<'a>(memo: &mut HashMap<&'a str, usize>, stripes: &HashSet<&'a str>
 pub fn run_one(data: &str) -> String {
     let (stripes, patterns, max) = parse(data);
     let mut memo = HashMap::new();
-    patterns.iter().filter(|p| find_order(&mut memo, &stripes, p, max) > 0).count().to_string()
+    patterns
+        .iter()
+        .filter(|p| find_order(&mut memo, &stripes, p, max) > 0)
+        .count()
+        .to_string()
 }
 
 pub fn run_two(data: &str) -> String {
     let (stripes, patterns, max) = parse(data);
     let mut memo = HashMap::new();
-    patterns.iter().map(|p| find_order(&mut memo, &stripes, p, max)).sum::<usize>().to_string()
+    patterns
+        .iter()
+        .map(|p| find_order(&mut memo, &stripes, p, max))
+        .sum::<usize>()
+        .to_string()
 }

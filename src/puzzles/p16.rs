@@ -7,7 +7,14 @@ fn parse(data: &str) -> Vec<Vec<char>> {
 }
 
 fn char_loc(map: &Vec<Vec<char>>, find_c: char) -> (usize, usize) {
-    map.iter().enumerate().find_map(|(row, v)| v.iter().enumerate().find_map(|(j, &c)| if c == find_c {Some((row, j))} else {None})).unwrap()
+    map.iter()
+        .enumerate()
+        .find_map(|(row, v)| {
+            v.iter()
+                .enumerate()
+                .find_map(|(j, &c)| if c == find_c { Some((row, j)) } else { None })
+        })
+        .unwrap()
 }
 
 fn next_check(row: usize, col: usize, dir: char) -> Vec<(usize, usize, char)> {
@@ -29,7 +36,7 @@ fn run(map: &Vec<Vec<char>>) -> (usize, usize) {
     while let Some(((c_row, c_col, c_dir), (weight, hist))) = queue.pop_front() {
         if let Some(&best_weight) = seen.get(&(c_row, c_col, c_dir)) {
             if weight > best_weight {
-                continue
+                continue;
             }
             if c_row == e_row && c_col == e_col && weight < best_weight {
                 best.clear();
@@ -40,7 +47,7 @@ fn run(map: &Vec<Vec<char>>) -> (usize, usize) {
         next_hist.push((c_row, c_col));
         if c_row == e_row && c_col == e_col {
             best.push(next_hist);
-            continue
+            continue;
         }
         for (n_row, n_col, n_dir) in next_check(c_row, c_col, c_dir) {
             if map[n_row][n_col] != '#' {
@@ -53,11 +60,15 @@ fn run(map: &Vec<Vec<char>>) -> (usize, usize) {
             }
         }
     }
-    let length = seen.iter().filter(|(&(row, col, _), _)| row == e_row && col == e_col).map(|(_, &weight)| weight).min().unwrap();
+    let length = seen
+        .iter()
+        .filter(|(&(row, col, _), _)| row == e_row && col == e_col)
+        .map(|(_, &weight)| weight)
+        .min()
+        .unwrap();
     let all_seen = best.into_iter().flatten().collect::<HashSet<_>>().len();
     (length, all_seen)
 }
-
 
 pub fn run_one(data: &str) -> String {
     let map = parse(data);
